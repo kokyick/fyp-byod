@@ -50,6 +50,8 @@
                 <ul class="nav sf-menu">
                   <li class="active"><a href="{{ route('viewindex') }}">Home</a></li>
                   <li><a href="{{ route('getrestaurant') }}">Browse</a></li>
+				  
+				  @if(!(Session::has('token')))
 				  <li><a href="{{ route('login') }}">Account</a>
 				      <ul>
 						  <li><img src="{{ asset('img/arrowup.png') }}" alt=""><a href="{{ route('login') }}">login</a></li>
@@ -64,6 +66,9 @@
                       </li>
                     </ul>
 				  </li>
+				   @else
+				   <li><a href="{{ route('dologout') }}">Logout</a></li>
+				   @endif
 				  <li><a href="{{ route('viewcart') }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                   <!--<li><a href="{{ route('viewindex1') }}">about us</a></li>
                   <li><a href="{{ route('viewcart') }}">links</a></li>-->

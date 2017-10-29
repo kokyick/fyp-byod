@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
+
 class HomeController extends Controller
 {
 	
@@ -38,6 +40,17 @@ class HomeController extends Controller
     }
 	public function viewcart()
     {
+		$subtotal=0;
+		if(Session::has('cart')){
+			foreach (Session::get('cart') as $food){
+				$subtotal+=floatval($food['itemprice'])*floatval($food['quantity']);
+			}
+			Session::put('subtotal', $subtotal); 
+		}
+		if(!(Session::has('subtotal'))){
+			Session::put('subtotal', $subtotal);
+		}
+		
         return view("app.cart");
     }
 	public function viewfeedback()

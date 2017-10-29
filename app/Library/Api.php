@@ -6,35 +6,46 @@ use Illuminate\Http\Request;
 
 class Api
 {
-	const server = "http://byod-server20171008041155.azurewebsites.net/api/";
+	const server = "http://byod-server20171008041155.azurewebsites.net/";
+
+	public static function postLogin($username, $password){
+		$client = new \GuzzleHttp\Client();
+
+		$result=$client->request('POST', self::server . 'Token', [
+			'form_params' => [
+				'grant_type' => "password",
+				'username' => $username,
+				'password' => $password
+			]
+		]);
+		return $result;
+	}
 
 	public static function getRequest($link)
 	{
 
 		$client = new \GuzzleHttp\Client();
 
-		$url = self::server . $link;
+		$url = self::server . "api/" . $link;
 
 		$request = $client->request('GET', $url);
 
 		$response = $request->getBody()->getContents();
-		//dd($response);
 
 		return ($response);
-
 	}
 	public static function postRequest($link, $myBody )
 	{
 
 		$client = new \GuzzleHttp\Client();
 		
-		$url = self::server + $link;
+		$url = self::server . "api/" . $link;
 
 		//$myBody['name'] = "Demo";
 
-		$request = $client->post($url,  ['body'=>$myBody]);
+		$request = $client->post($url,  ['form_params'=>$myBody]);
 
-		$response = $request->send();
+		$response = $request->getBody()->getContents();
 
 
 		dd($response);
@@ -45,7 +56,7 @@ class Api
 
 		$client = new \GuzzleHttp\Client();
 		
-		$url = self::server + $link;
+		$url = self::server . "api/" . $link;
 
 		//$myBody['name'] = "Demo";
 
@@ -62,7 +73,7 @@ class Api
 
 		$client = new \GuzzleHttp\Client();
 		
-		$url = self::server + $link;
+		$url = self::server . "api/" . $link;
 
 		$request = $client->delete($url);
 

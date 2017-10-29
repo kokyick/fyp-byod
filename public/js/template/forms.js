@@ -11,7 +11,7 @@
 					successCl:'success',
 					successShow:'4000',
 					mailHandlerURL:'bat/MailHandler.php',
-					ownerEmail:'support@template-help.com',
+					ownerEmail:'admin@whaletress.com',
 					stripHTML:true,
 					smtpMailServer:'localhost',
 					targets:'input,textarea',
@@ -181,9 +181,6 @@
 	}
 })(jQuery)
 $(window).load(function(){
-   $('#contact-form2').forms({
-	ownerEmail:'#'
-   })
    $('#contact-form').forms({
 	ownerEmail:'#'
    })

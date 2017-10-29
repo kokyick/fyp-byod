@@ -43,7 +43,14 @@
 									<hr/>
 								</ul>
 								@endif
-								<h3>$84</h3>
+								<h3>
+									$
+									@if(Session::has('subtotal'))
+										{{Session::get('subtotal')}}
+									@else
+										0
+									@endif
+								</h3>
 								<hr/>
 							</div>
 						</div>

@@ -4,12 +4,15 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
+    "\\app\\Library",
+    "\\config",
     "\\public",
-    "\\public\\css",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\app"
+    "\\resources\\views\\app",
+    "\\resources\\views\\layouts",
+    "\\routes"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\RestaurantController.php",
+  "SelectedNode": "\\routes\\web.php",
   "PreviewInSolutionExplorer": false
 }
