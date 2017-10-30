@@ -9,10 +9,8 @@
     "\\public",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\app",
-    "\\resources\\views\\layouts",
-    "\\routes"
+    "\\resources\\views\\app"
   ],
-  "SelectedNode": "\\routes\\web.php",
+  "SelectedNode": "\\composer.json",
   "PreviewInSolutionExplorer": false
 }
