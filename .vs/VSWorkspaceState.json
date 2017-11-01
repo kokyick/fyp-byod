@@ -5,12 +5,12 @@
     "\\app\\Http",
     "\\app\\Http\\Controllers",
     "\\app\\Library",
-    "\\config",
     "\\public",
+    "\\public\\css",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\app"
+    "\\resources\\views\\layouts"
   ],
-  "SelectedNode": "\\web.config",
+  "SelectedNode": "\\resources\\views\\layouts\\master.blade.php",
   "PreviewInSolutionExplorer": false
 }
