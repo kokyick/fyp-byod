@@ -41,16 +41,39 @@ class CartController extends Controller
 	//Check if its the same outlet
 	//Check if its the same food in cart
 	$isin=false;
-	if(Session::has('cart')){
-		foreach (Session::get('cart') as $food){
-			if($food['itemid']==$product['itemid']){
-				$food['quantity']+=$product['quantity'];
-				$isin=true;
+	
+	if(Session::has('outlet')){
+		$food=Session::get('outlet');
+		if($food['outlet_id']==$product['outletid']){
+			if(Session::has('cart')){
+				foreach (Session::get('cart') as $food){
+					if($food['itemid']==$product['itemid']){
+						$food['quantity']+=$product['quantity'];
+						$isin=true;
+					}
+				}
+			}
+			if($isin==false)
+				Session::push('cart', $product); 
+		}else{
+			alert("Order not added, you have items from other outlet in your cart");
+		}
+	}else{
+		$OList =Api::getRequest("Outlets?outlet_id=" . $product['outletid']);
+		$Outlet = json_decode( $OList, true );
+		Session::put('outlet',$Outlet);
+		if(Session::has('cart')){
+			foreach (Session::get('cart') as $food){
+				if($food['itemid']==$product['itemid']){
+					$food['quantity']+=$product['quantity'];
+					$isin=true;
+				}
 			}
 		}
+		if($isin==false)
+			Session::push('cart', $product); 
 	}
-	if($isin==false)
-		Session::push('cart', $product); 
+
 	//}
 
     return redirect()->route('menus', ['id'=>$outId]);

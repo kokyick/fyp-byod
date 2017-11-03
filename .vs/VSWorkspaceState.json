@@ -9,8 +9,8 @@
     "\\public\\css",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\layouts"
+    "\\resources\\views\\app"
   ],
-  "SelectedNode": "\\resources\\views\\layouts\\master.blade.php",
+  "SelectedNode": "\\resources\\views\\app\\menu.blade.php",
   "PreviewInSolutionExplorer": false
 }

@@ -69,7 +69,7 @@
 				   @else
 				   <li><a href="{{ route('dologout') }}">Logout</a></li>
 				   @endif
-				  <li><a href="{{ route('viewcart') }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+				  <li><a href="{{ route('viewcart') }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Cart</a></li>
                   <!--<li><a href="{{ route('viewindex1') }}">about us</a></li>
                   <li><a href="{{ route('viewcart') }}">links</a></li>-->
                 </ul>
@@ -98,7 +98,7 @@
                 </ul>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 footerlogo footercol">
-                <a class="smalllogo2 logo" href="index.html"><img src="{{ asset('img/logofooter.png') }}" alt=""></a>
+                <a class="smalllogo2 logo" href="{{ route('viewindex') }}"><img src="{{ asset('img/logofooter.png') }}" alt=""></a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 footercol">
                 <p class="footerpriv">&copy; 2017 BYOD SIT FYP <br/> 

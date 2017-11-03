@@ -45,6 +45,12 @@ class HomeController extends Controller
 			foreach (Session::get('cart') as $food){
 				$subtotal+=floatval($food['itemprice'])*floatval($food['quantity']);
 			}
+			if(Session::has('outlet')){
+				$outlet=Session::get('outlet');
+				$gstcharge=$subtotal*(floatval($outlet['gst'])/100);
+				$svscharge=$subtotal*(floatval($outlet['servicecharge'])/100);
+				$subtotal=$subtotal+$gstcharge+$svscharge;
+			}
 			Session::put('subtotal', $subtotal); 
 		}
 		if(!(Session::has('subtotal'))){

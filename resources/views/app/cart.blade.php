@@ -24,7 +24,6 @@
 									</div>
 								@endforeach
 							@endif
-							
                           </div>
                         </div>
     	           </div>
@@ -40,6 +39,21 @@
 									@foreach (Session::get('cart') as $food)
 										<li><a href="#filter" data-option-value=".{{ $food }}">{{ $food['itemname'] }} x{{ $food['quantity'] }}</a></li>
 									@endforeach
+									<hr style="border-top: ridge 1px;" />
+									<h3 style="color:#EF5350;">Service charge:</h3>
+									
+									@if(Session::has('outlet'))
+										<h3>{{Session::get('outlet')['servicecharge']}}%</h3>
+									@else
+										<h3>0%</h3>
+									@endif
+									<h3 style="color:#EF5350;">GST:</h3>
+									@if(Session::has('outlet'))
+										<h3>{{Session::get('outlet')['gst']}}%</h3>
+									@else
+										<h3>0%</h3>
+									@endif
+									
 									<hr/>
 								</ul>
 								@endif
@@ -54,6 +68,8 @@
 								<hr/>
 							</div>
 						</div>
+						<button style="width:100%;" type="button" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i> Pay by cash</button>
+						<button style="width:100%; margin-top:10px;" type="button" class="btn btn-primary"><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
     	           </div>
                 </div>
         </div>
