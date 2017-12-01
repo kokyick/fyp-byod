@@ -6,11 +6,11 @@
     "\\app\\Http\\Controllers",
     "\\app\\Library",
     "\\public",
-    "\\public\\css",
+    "\\public\\js",
+    "\\public\\js\\template",
     "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\app"
+    "\\resources\\views"
   ],
-  "SelectedNode": "\\resources\\views\\app\\menu.blade.php",
+  "SelectedNode": "\\public\\js\\template\\stripe.js",
   "PreviewInSolutionExplorer": false
 }
