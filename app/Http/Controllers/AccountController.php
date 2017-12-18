@@ -19,6 +19,7 @@ class AccountController extends Controller
 		//Session::flush();
 		//{{print_r(Session::get('token')->getHeader('Set-Cookie')[0])}}
 		Session::put('token',$result);
+		//dd($result);
 		return redirect()->route('viewindex');
 
 	}	
@@ -34,7 +35,9 @@ class AccountController extends Controller
 		$myBody['ConfirmPassword'] = $request->cpw;
 		$result =Api::postRequest("Account/Register",$myBody);
 		//Session::flush();
-		return redirect()->route('login');
+		
+		//return redirect()->route('viewindex');
+		return view("app.login");
 
 	}
 }

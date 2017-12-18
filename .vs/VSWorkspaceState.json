@@ -4,13 +4,13 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
+    "\\app\\Http\\Middleware",
     "\\app\\Library",
-    "\\public",
-    "\\public\\js",
-    "\\public\\js\\template",
     "\\resources",
-    "\\resources\\views"
+    "\\resources\\views",
+    "\\resources\\views\\layouts",
+    "\\routes"
   ],
-  "SelectedNode": "\\public\\js\\template\\stripe.js",
+  "SelectedNode": "\\app\\Http\\Controllers\\AccountController.php",
   "PreviewInSolutionExplorer": false
 }

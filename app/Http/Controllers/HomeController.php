@@ -75,6 +75,10 @@ class HomeController extends Controller
     {
         return view("app.login");
     }
+	public function viewaddcard()
+	{
+		return view("app.addcard");
+	}
 
 
 }

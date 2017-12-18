@@ -69,13 +69,13 @@
 							</div>
 						</div>
 						<button style="width:100%;" type="button" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i> Pay by cash</button>
-						<button style="width:100%; margin-top:10px;" type="button" class="btn btn-primary"><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
+						<button style="width:100%; margin-top:10px;" type="button" id="myBtn1" class="btn btn-primary myBtn1"><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
     	           </div>
                 </div>
         </div>
     </div>
 </div>
-
+<!-- DISPLAY FOOD -->
 <style>
 /* The Modal (background) */
 .modal {
@@ -306,4 +306,144 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+<!-- DISPLAY CARD -->
+<style>
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content1 {
+    position: relative;
+	border-radius: 10px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close1 {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header1 {
+    padding: 2px 16px;
+	border-radius: 10px 10px 0px 0px;
+    background-color: #EF5350;
+    color: white;
+}
+
+.modal-body1 {padding: 2px 16px;}
+
+.modal-footer1 {
+	border-radius: 10px;
+    padding: 2px 16px;
+    background-color: #EF5350;
+    color: white;
+}
+</style>
+
+<!-- The Modal -->
+<div id="myModal1" class="modal1">
+  
+  <!-- Modal content -->
+  <div class="modal-content1">
+    <div class="modal-header1">
+      <span class="close1">&times;</span>
+      <h2 style="color: #FFFFFF;">Payment</h2>
+    </div>
+    <div class="modal-body1">
+        <div class="row privacy_page" style="padding:10px; text-align:center;">
+            
+				<figure><img src="img/smalllogo1.png" alt=""></figure>
+				<hr/>
+				<h3>Choose your card:</h3>
+				<hr/>
+				<select id="aitemfood_type" name="aitemfood_type"  class="form-control">
+						<option value="0003">XXXX-XXXX-XXXX-0003</option>
+				</select>
+				 <div class="center">
+				    
+					<p>
+					  </p>
+					<p></p>
+					
+					<button type="button" class="btn btn-danger"><i class="fa fa-money" aria-hidden="true"></i> Pay now</button><br/>
+					<a href="{{ route('addcard')}}" class="btn-link btn-link2">Add card<span></span></a>
+					</div>
+			
+        </div> 
+    </div>
+    <div class="modal-footer1">
+    </div>
+  </div>
+
+</div>
+
+<script>
+var modal1 = document.getElementById('myModal1');
+// Get the button that opens the modal
+var btn1 = document.getElementById("myBtn1");
+
+// Get the <span> element that closes the modal
+var span1 = document.getElementsByClassName("close1")[0];
+
+// When the user clicks the button, open the modal 
+btn1.onclick = function() {
+    modal1.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span1.onclick = function() {
+    modal1.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }
+}
+</script>
+
 @endsection

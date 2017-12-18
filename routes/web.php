@@ -26,6 +26,7 @@ Route::get('/viewfeedback', 'HomeController@viewfeedback')->name('viewfeedback')
 Route::get('/viewterms', 'HomeController@viewterms')->name('viewterms');
 Route::get('/registration', 'HomeController@viewregistration')->name('registration');
 Route::get('/login', 'HomeController@viewlogin')->name('login');
+Route::get('/addcard', 'HomeController@viewaddcard')->name('addcard');
 
 
 Route::get('/menus/{id}', 'RestaurantController@viewmenus')->name('menus');

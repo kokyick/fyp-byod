@@ -2,15 +2,21 @@
 namespace App\Library;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Cookie\CookieJar;
 
+use GuzzleHttp\Cookie\FileCookieJar;
 
 class Api
 {
 	const server = "http://byod-server20171008041155.azurewebsites.net/";
 
 	public static function postLogin($username, $password){
-		$client = new \GuzzleHttp\Client();
+	
+		//file to store cookie data
+		$cookieFile = 'var/www/jar.txt';
 
+		$client = new \GuzzleHttp\Client();
+		$cookieJar = new CookieJar();
 		$result=$client->request('POST', self::server . 'Token', [
 			'form_params' => [
 				'grant_type' => "password",
@@ -18,6 +24,7 @@ class Api
 				'password' => $password
 			]
 		]);
+		$cookieJar = CookieJar::fromArray(['cookie_name' => 'cookie_value'], 'example.com');
 		return $result;
 	}
 
@@ -27,8 +34,8 @@ class Api
 		$client = new \GuzzleHttp\Client();
 
 		$url = self::server . "api/" . $link;
-
-		$request = $client->request('GET', $url);
+		$jar = new \GuzzleHttp\Cookie\CookieJar();
+		$request = $client->request('GET', $url, ['cookies' => $jar]);
 
 		$response = $request->getBody()->getContents();
 
@@ -42,13 +49,14 @@ class Api
 		$url = self::server . "api/" . $link;
 
 		//$myBody['name'] = "Demo";
-
-		$request = $client->post($url,  ['form_params'=>$myBody]);
+		
+		$jar = new \GuzzleHttp\Cookie\CookieJar();
+		$request = $client->post($url,  ['form_params'=>$myBody], $url, ['cookies' => $jar]);
 
 		$response = $request->getBody()->getContents();
 
-
-		dd($response);
+		return ($response);
+		//dd($response);
 
 	}
 	public static function putRequest($link, $myBody)
