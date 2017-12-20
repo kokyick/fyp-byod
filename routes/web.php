@@ -36,6 +36,8 @@ Route::get('/getrestaurant', 'RestaurantController@getrestaurant')->name('getres
 
 
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
+Route::post('/ordercash/', 'CartController@AddOrderCash')->name('ordercash');
+Route::post('/ordercard/', 'CartController@AddOrderCard')->name('ordercard');
 
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
 Route::post('/doregister/', 'AccountController@register')->name('doregister');

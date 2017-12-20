@@ -325,6 +325,7 @@
 						<input style="display: none;" id="itemname" type="text" name="itemname" class="form-control input-number">
 						<input style="display: none;" id="itemprice" type="text" name="itemprice" class="form-control input-number">
 						<input style="display: none;" id="itemproduct_image" type="text" name="itemproduct_image" class="form-control input-number">
+                        <input style="display: none;" id="itemoutlet_productid" type="text" name="itemoutlet_productid" class="form-control input-number">
 						<input style="display: none;" id="itemfood_type" type="text" name="itemfood_type" class="form-control input-number">
 						<input style="display: none;" id="itemmerchant_id" type="text" name="itemmerchant_id" class="form-control input-number">
 						<p></p>
@@ -443,6 +444,7 @@ $('.myBtn').click(function(){
 		$('#itemproduct_image').attr('value', data.product_image);
 		$('#itemfood_type').attr('value', data.food_type);
 		$('#itemmerchant_id').attr('value', data.merchant_id);
+        $('#itemoutlet_productid').attr('value', data.outletproduct_id)
 	});
 	
 

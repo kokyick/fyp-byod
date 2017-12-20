@@ -966,6 +966,7 @@ hr.line2 {
 .description {
 	position: relative;
 	display: block;
+	height: 40px;
 }
 #filters {
 	position: relative;

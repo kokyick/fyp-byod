@@ -12,6 +12,53 @@ use Session;
 
 class CartController extends Controller
 {
+  public function AddOrderCash(Request $request)
+  {
+  	//Add Order
+	$myBody['total_bill'] = $request->total_bill;
+	$myBody['table_id']=(int)$request->table_id;
+	$result =Api::postRequest("SendOrder",$myBody);
+	$resultObj=json_decode($result);
+	// add food items
+	foreach (Session::get('cart') as $food){
+		$addFood['outlet_product_id']=(int)$food['itemoutlet_productid'];
+    	$addFood['order_id']=(int)$resultObj->order_id;
+		$addFood['quantity']=(int)$food['quantity'];
+		$addFood['quantity']=1;
+		//dd($addFood);
+		$result =Api::postRequest("addFoodOrder",$addFood);
+	}
+
+	//Session::flush();
+	Session::forget('cart');
+	Session::forget('subtotal');
+	// //return redirect()->route('viewindex');
+	// return view("app.index");
+	$notification = array(
+	'message' => 'Order sent successfully', 
+	'alert-type' => 'success'
+	);
+	Session::put('message',$notification);
+
+	// return Redirect::to('/');
+	return redirect()->route('viewindex')->with($notification);
+
+  }
+  public function AddOrderCard(Request $request)
+  {
+  	//Add Order
+	$myBody['total_bill'] = $request->amt;
+	$myBody['table_id']=$request->tableId;
+	$result =Api::postRequest("SendOrder",$myBody);
+	//Session::flush();
+	Session::forget('cart');
+	Session::forget('subtotal');
+
+	Session::put('message',$Outlet);
+	//return redirect()->route('viewindex');
+	return view("app.index");
+
+  }
   public function AddCart(Request $request)
   {
 	//Check if its the same outlet
@@ -25,10 +72,11 @@ class CartController extends Controller
 	$itemproduct_image=$request->itemproduct_image;
 	$itemfood_type=$request->itemfood_type;	
 	$itemmerchant_id=$request->itemmerchant_id;
+	$itemoutlet_productid=$request->itemoutlet_productid;
 	//delete all session data
 	//Session::flush();
 	//new product to be added
-	$product=collect(['quantity' => $quan, 'outletid' => $outId, 'itemid' =>$itemid, 'itemname' =>$itemname, 'itemprice' =>$itemprice, 'itemproduct_image' =>$itemproduct_image, 'itemfood_type' =>$itemfood_type, 'itemmerchant_id' =>$itemmerchant_id]);
+	$product=collect(['quantity' => $quan, 'outletid' => $outId, 'itemid' =>$itemid, 'itemname' =>$itemname, 'itemprice' =>$itemprice, 'itemproduct_image' =>$itemproduct_image,'itemoutlet_productid'=>$itemoutlet_productid, 'itemfood_type' =>$itemfood_type, 'itemmerchant_id' =>$itemmerchant_id]);
 	//retrieve old cart
 	//if(Session::has('cart')){
 		//$oldcart=Session::get('cart');

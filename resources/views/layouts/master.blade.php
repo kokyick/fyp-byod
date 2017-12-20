@@ -33,7 +33,9 @@
 
     <!-- index 4 -->
     <script src="{{ asset('js/template/forms.js') }}"></script>
-	
+    <!-- toast -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </header>
 <body>
    
@@ -111,5 +113,28 @@
 </footer>
 <script src="{{ asset('js/template/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/template/tm-scripts.js') }}"></script>
+<!-- toast -->
+<script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
+</script>
 </body>
 </html>

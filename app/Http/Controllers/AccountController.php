@@ -28,7 +28,8 @@ class AccountController extends Controller
 		return redirect()->route('viewindex');
 
 	}	
-	public function register(Request $request){
+	public function register(Request $request)
+	{
 		//Login
 		$myBody['Email'] = $request->email;
 		$myBody['Password'] = $request->pw;
