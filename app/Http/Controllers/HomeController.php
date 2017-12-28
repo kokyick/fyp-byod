@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Library\Api;
+
 use Session;
 
 class HomeController extends Controller
@@ -51,13 +53,25 @@ class HomeController extends Controller
 				$svscharge=$subtotal*(floatval($outlet['servicecharge'])/100);
 				$subtotal=$subtotal+$gstcharge+$svscharge;
 			}
-			Session::put('subtotal', $subtotal); 
 		}
-		if(!(Session::has('subtotal'))){
-			Session::put('subtotal', $subtotal);
-		}
+        if(Session::has('promo')){
+            $discounted=Session::get('promo')*$subtotal;
+            $subtotal=$subtotal-$discounted;
+            // dd($finalprice);
+        }
+        Session::forget('subtotal'); 
+        Session::put('subtotal', $subtotal); 
 		
         return view("app.cart");
+    }
+    public function vieworders()
+    {
+        //Menus
+        $OList =Api::getRequest("ClosedOrders");
+        $OrderList = json_decode( $OList, true );
+        $CList =Api::getRequest("OpenOrders");
+        $COrderList = json_decode( $CList, true );
+        return view("app.orders", compact('OrderList','COrderList'));
     }
 	public function viewfeedback()
     {

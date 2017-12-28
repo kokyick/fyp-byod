@@ -41,22 +41,69 @@ class CartController extends Controller
 	Session::put('message',$notification);
 
 	// return Redirect::to('/');
-	return redirect()->route('viewindex')->with($notification);
+	return redirect()->route('vieworders')->with($notification);
 
   }
   public function AddOrderCard(Request $request)
   {
   	//Add Order
 	$myBody['total_bill'] = $request->amt;
-	$myBody['table_id']=$request->tableId;
+	$myBody['table_id']=(int)$request->tableId;
+	//dd($myBody);
 	$result =Api::postRequest("SendOrder",$myBody);
+	$resultObj=json_decode($result);
+	// add food items
+	foreach (Session::get('cart') as $food){
+		$addFood['outlet_product_id']=(int)$food['itemoutlet_productid'];
+    	$addFood['order_id']=(int)$resultObj->order_id;
+		$addFood['quantity']=(int)$food['quantity'];
+		$addFood['quantity']=1;
+		//dd($addFood);
+		$result2 =Api::postRequest("addFoodOrder",$addFood);
+	}
+	$amt=$request->amt*100;
+	if($result!=null){
+		$card['Card_id']=10;
+		$card['Last_four_digit']="0003";
+		$card['Payment_key']="cus_Bw2zKHZOzhe4BM";
+		$card['User_id']="9872f4ef-1679-4442-a5cd-44c238687b00";
+		$card['Card_type_id']=1;
+		
+		//dd($card);
+		$payment =Api::postRequest("ChargeStripeCards?amt=" . $amt,$card);
+	}
+
 	//Session::flush();
 	Session::forget('cart');
 	Session::forget('subtotal');
+	// //return redirect()->route('viewindex');
+	// return view("app.index");
+	$notification = array(
+	'message' => 'Order sent successfully', 
+	'alert-type' => 'success'
+	);
+	Session::put('message',$notification);
 
-	Session::put('message',$Outlet);
+	// return Redirect::to('/');
+	return redirect()->route('vieworders')->with($notification);
+
+  }
+  public function AddPromo(Request $request)
+  {
+	$name=$request->promo;
+	$result =Api::getRequest("Promocodes?promoname=" . $name);
+	//Session::flush();
+	if($result!=null){
+		$Promo = json_decode( $result, true );
+		// dd($Promo);
+
+		Session::forget('promo');
+		Session::put('promo', $Promo['discount']);
+
+	}
 	//return redirect()->route('viewindex');
-	return view("app.index");
+	
+    return redirect()->route('viewcart');
 
   }
   public function AddCart(Request $request)

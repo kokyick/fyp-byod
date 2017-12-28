@@ -180,7 +180,8 @@
 						<div class="element transition {{ $Menu['food_type_id'] }} myBtn" id="{{ route('singlemenus', $Menu['merchant_product_id']) }}" data-category="transition">
 							<div class="card">
 								<div class="card-content">
-                    				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{ $Menu['name'] }}</span>
+                                    <?php $pieces = explode(",", $Menu['name']); ?>
+                    				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{$Menu['name']}}</span>
 									@for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
 										<span>☆</span>
 									@endfor
@@ -429,7 +430,7 @@ $('.myBtn').click(function(){
 	var food = $(this).attr('id');
 	$.get(food,function(data){
 		var header="<h3>" + data.name + "</h3>";
-		var body="$ "+data.price+"<br/> ";
+		var body=data.price+" RM<br/> ";
 		for (i = 0; i < Math.round(data.avg_ratings); i++) { 
 			body += "<span>☆</span>";
 		}

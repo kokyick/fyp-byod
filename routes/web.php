@@ -24,6 +24,7 @@ Route::get('/viewindex1', 'HomeController@viewindex1')->name('viewindex1');
 Route::get('/viewcart', 'HomeController@viewcart')->name('viewcart');
 Route::get('/viewfeedback', 'HomeController@viewfeedback')->name('viewfeedback');
 Route::get('/viewterms', 'HomeController@viewterms')->name('viewterms');
+Route::get('/vieworders', 'HomeController@vieworders')->name('vieworders');
 Route::get('/registration', 'HomeController@viewregistration')->name('registration');
 Route::get('/login', 'HomeController@viewlogin')->name('login');
 Route::get('/addcard', 'HomeController@viewaddcard')->name('addcard');
@@ -38,6 +39,7 @@ Route::get('/getrestaurant', 'RestaurantController@getrestaurant')->name('getres
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
 Route::post('/ordercash/', 'CartController@AddOrderCash')->name('ordercash');
 Route::post('/ordercard/', 'CartController@AddOrderCard')->name('ordercard');
+Route::post('/addpromo/', 'CartController@AddPromo')->name('addpromo');
 
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
 Route::post('/doregister/', 'AccountController@register')->name('doregister');

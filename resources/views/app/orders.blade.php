@@ -8,87 +8,70 @@
     <div class="row_7">
         <div class="container">
             <div class="row">
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <h2 class="pad_bot2">Your Orders</h2>
+                <h2 class="pad_bot2">My Current Orders</h2>
                 <div class="row links">
                     <div class="col-lg-6 col-md-6 col-sm-6" style="width:100%;">
 
-                     @if(Session::get('cart'))
-                     @foreach (Session::get('cart') as $food)
-                     <div class="card myBtn">
-                      <div class="card-content">
-                         <img src="{{ $food['itemproduct_image'] }}" alt="{{ $food['itemname'] }}" class="img-thumb img-thumbnail">
-                         <h3>{{ $food['itemname'] }}</h3>
-                         <p style="margin-bottom: 0px; color: #ef5350;">{{ $food['itemprice'] }} x {{ $food['quantity'] }} RM </p>
+                    @foreach ($COrderList as $cfood)
+                    <div class="card" style="width: 30%;">
+                           <div class="card-content">
+                              <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
+                              <hr/>
+                              <h2 style="padding:0;">Orders #{{ $cfood[0]['order_id'] }}</h2>
+                              @if($cfood[0]['order_status']==1)
+                                <h3><i style="color: #81C784;" class="fa fa-circle" aria-hidden="true"></i> Completed</h3>
+                              @else
+                                <h3><i style="color: #FDD835;" class="fa fa-circle" aria-hidden="true"></i> Processing</h3>
+                              @endif
+                              <hr/>
+
+                              @foreach ($cfood as $cfoods)
+                              <ul class="list2">
+                                 <li>{{ $cfoods['name'] }} x {{ $cfoods['quantity'] }}</li>
+                             </ul>
+                             @endforeach
+                             <hr/>
+                             <h3>{{ $cfood[0]['order_bill'] }} RM</h3>
+                             <hr/>
+                         </div>
                      </div>
-                 </div>
-                 @endforeach
-                 @endif
+                   @endforeach
              </div>
          </div>
-     </div>
-     <div class="col-lg-4 col-md-4 col-sm-4">
-      <div class="card" style="width: 100%;">
-         <div class="card-content">
-            <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
-            <hr/>
-            <h2 style="padding:0;">Sub Total</h2>
-            <hr/>
-            @if(Session::get('cart'))
-            <ul class="list2">
-               @foreach (Session::get('cart') as $food)
-               <li><a href="#filter" data-option-value=".{{ $food }}">{{ $food['itemname'] }} x{{ $food['quantity'] }}</a></li>
-               @endforeach
-               <hr style="border-top: ridge 1px;" />
-               <h3 style="color:#EF5350;">Service charge:</h3>
 
-               @if(Session::has('outlet'))
-               <h3>{{Session::get('outlet')['servicecharge']}}%</h3>
-               @else
-               <h3>0%</h3>
-               @endif
-               <h3 style="color:#EF5350;">GST:</h3>
-               @if(Session::has('outlet'))
-               <h3>{{Session::get('outlet')['gst']}}%</h3>
-               @else
-               <h3>0%</h3>
-               @endif
-
-               <hr/>
-           </ul>
-           @endif
-           
-            @if(Session::has('promo'))
-              <span class="label label-success">{{Session::get('promo') * 100 }}% discount applied</span>
-            @endif
-                
-            
-           <h3>
-               @if(Session::has('subtotal'))
-               {{Session::get('subtotal')}}
-               @else
-               0
-               @endif
-                RM
-           </h3>
-           <hr/>
-       </div>
-   </div>
-
-      <div class="card" style="width: 100%;">
-         <div class="card-content">
-            <form action="{{ route('addpromo')}}" method="POST">
-              {{ csrf_field() }}
-              <input type="text" name="promo" placeholder="Promo Code" class="form-control" id="promo" style="width: 80%; float: left;" required="true">
-              <button type="submit" style="width: 20%; float: right;" class="btn btn-primary">Apply</button><br/>
-            </form>
-         </div>
-       </div>
- @if(Session::has('cart'))
-   <button style="width:100%;" type="button" id="myBtn2" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i> Pay by cash</button>
-   <button style="width:100%; margin-top:10px;" type="button" id="myBtn1" class="btn btn-primary myBtn1"><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
- @endif
 </div>
+            <div class="row">
+                <h2 class="pad_bot2">My Past Orders</h2>
+                <div class="row links">
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="width:100%;">
+
+                    @foreach ($OrderList as $food)
+                    <div class="card" style="width: 30%;">
+                           <div class="card-content">
+                              <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
+                              <hr/>
+                              <h2 style="padding:0;">Orders #{{ $food[0]['order_id'] }}</h2>
+                              @if($food[0]['order_status']==1)
+                                <h3><i style="color: #81C784;" class="fa fa-circle" aria-hidden="true"></i> Completed</h3>
+                              @else
+                                <h3><i style="color: #FDD835;" class="fa fa-circle" aria-hidden="true"></i> Processing</h3>
+                              @endif
+                              <hr/>
+
+                              @foreach ($food as $foods)
+                              <ul class="list2">
+                                 <li>{{ $foods['name'] }} x {{ $foods['quantity'] }}</li>
+                             </ul>
+                             @endforeach
+                             <hr/>
+                             <h3>{{ $food[0]['order_bill'] }} RM</h3>
+                             <hr/>
+                         </div>
+                     </div>
+                   @endforeach
+             </div>
+         </div>
+
 </div>
 </div>
 </div>
