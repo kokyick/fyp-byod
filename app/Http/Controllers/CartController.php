@@ -66,7 +66,7 @@ class CartController extends Controller
 		$card['Payment_key']="cus_Bw2zKHZOzhe4BM";
 		$card['User_id']="9872f4ef-1679-4442-a5cd-44c238687b00";
 		$card['Order_ID']=(int)$resultObj->order_id;
-		// dd($card);
+		//dd($card);
 		$payment =Api::postRequest("ChargeStripeCards?amt=" . $amt,$card);
 	}
 

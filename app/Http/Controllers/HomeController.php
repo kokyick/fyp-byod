@@ -51,7 +51,7 @@ class HomeController extends Controller
 				$outlet=Session::get('outlet');
 				$gstcharge=$subtotal*(floatval($outlet['gst'])/100);
 				$svscharge=$subtotal*(floatval($outlet['servicecharge'])/100);
-				$subtotal=$subtotal+$gstcharge+$svscharge;
+				$subtotal=round($subtotal+$gstcharge+$svscharge, 2);
 			}
 		}
         if(Session::has('promo')){
