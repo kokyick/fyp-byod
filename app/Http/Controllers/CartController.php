@@ -24,8 +24,7 @@ class CartController extends Controller
 		$addFood['outlet_product_id']=(int)$food['itemoutlet_productid'];
     	$addFood['order_id']=(int)$resultObj->order_id;
 		$addFood['quantity']=(int)$food['quantity'];
-		$addFood['quantity']=1;
-		//dd($addFood);
+		$addFood['comments']="";
 		$result =Api::postRequest("addFoodOrder",$addFood);
 	}
 
@@ -57,19 +56,17 @@ class CartController extends Controller
 		$addFood['outlet_product_id']=(int)$food['itemoutlet_productid'];
     	$addFood['order_id']=(int)$resultObj->order_id;
 		$addFood['quantity']=(int)$food['quantity'];
-		$addFood['quantity']=1;
-		//dd($addFood);
+		$addFood['quantity']=(int)$food['quantity'];
+		$addFood['comments']="";
 		$result2 =Api::postRequest("addFoodOrder",$addFood);
 	}
-	$amt=$request->amt*100;
+	$amt=round($request->amt, 2)*100;
 	if($result!=null){
 		$card['Card_id']=10;
-		$card['Last_four_digit']="0003";
 		$card['Payment_key']="cus_Bw2zKHZOzhe4BM";
 		$card['User_id']="9872f4ef-1679-4442-a5cd-44c238687b00";
-		$card['Card_type_id']=1;
-		
-		//dd($card);
+		$card['Order_ID']=(int)$resultObj->order_id;
+		// dd($card);
 		$payment =Api::postRequest("ChargeStripeCards?amt=" . $amt,$card);
 	}
 
