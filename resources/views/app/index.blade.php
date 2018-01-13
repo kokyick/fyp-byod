@@ -24,15 +24,15 @@
         </div>
     </div>
     <!--==============================row1=================================-->
-    <div class="row_1">
+    <div class="row_1" style="background: #E57373;">
         <div class="container">
-            <p class="title1">Someone is hungry!</p>
-            <p class="title2">Beciegast nveriti vitaesaert asety kertya aset aplica boserde nerafae kertyuraue styasnemo faserani  iasera khatrsasas ptaiadeser daesraeds. Casrolern atur aut oditaut. onsequuntur magni dolqui ratione voluptatemsequi nesciunt orasario jauystase joasuaserya vytarsa numquam eius modi teincidunt, ut labore et dolore magnam liaseras.</p>
-            <a href="#" class="btn btn-default btn-lg btn1">more</a>
+            <p class="title1">Welcome to Whaletress!</p>
+            <p class="title2">Whaletress is a one stop application, designed to satisfy you every hunger. No more waiving your hands to nearby waitresses, right now you are just a few clicks away from accesing the restautant's menu, placing your orders as well as tracking your orders.</p>
+            <a href="{{ route('getrestaurant') }}" class="btn btn-default btn-lg btn1">Order</a>
         </div>
     </div>
     <!--==============================row2=================================-->
-    <div class="row_2">
+<!--     <div class="row_2">
         <div class="container">
             <div class="row">
                 <ul class="list1">
@@ -63,9 +63,9 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--==============================row3=================================-->
-    <div class="row_3">
+   <!--  <div class="row_3">
         <div class="container">
             <div class="row">
                 <ul class="list3">
@@ -116,9 +116,9 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--==============================row4=================================-->
-    <div class="row_4">
+<!--     <div class="row_4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 chef row4_col">
@@ -151,6 +151,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection
