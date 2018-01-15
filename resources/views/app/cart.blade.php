@@ -85,9 +85,14 @@
             </form>
          </div>
        </div>
- @if(Session::has('cart'))
+ @if(Session::has('cart') && Session::has('token'))
    <button style="width:100%;" type="button" id="myBtn2" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i> Pay by cash</button>
-   <button style="width:100%; margin-top:10px;" type="button" id="myBtn1" class="btn btn-primary myBtn1" disabled><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
+   <button style="width:100%; margin-top:10px;" type="button" id="myBtn1" class="btn btn-primary myBtn1" disabled><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card <i>(Coming soon)</i></button>
+ @endif
+ @if(!Session::has('token'))
+ <form action="{{ route('login')}}" method="GET">
+    <button style="width:100%; margin-top:10px;" type="submit" id="login" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i></i> Login to order</button>
+ </form>
  @endif
 </div>
 </div>
