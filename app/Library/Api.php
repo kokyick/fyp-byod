@@ -2,9 +2,8 @@
 namespace App\Library;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Cookie\CookieJar;
 
-use GuzzleHttp\Cookie\FileCookieJar;
+use Session;
 
 class Api
 {
