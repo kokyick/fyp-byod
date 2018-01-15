@@ -12,20 +12,22 @@ class Api
 
 	public static function postLogin($username, $password){
 	
-		//file to store cookie data
-		$cookieFile = 'var/www/jar.txt';
-
 		$client = new \GuzzleHttp\Client();
-		$cookieJar = new CookieJar();
+		$headers = [
+		    'Content-Type' => 'application/x-www-form-urlencoded'
+		];
+
 		$result=$client->request('POST', self::server . 'Token', [
+			'headers' => $headers,
 			'form_params' => [
 				'grant_type' => "password",
 				'username' => $username,
 				'password' => $password
 			]
 		]);
-		$cookieJar = CookieJar::fromArray(['cookie_name' => 'cookie_value'], 'example.com');
-		return $result;
+		$response = $result->getBody()->getContents();
+		$resultauth=substr($response,17,491);
+		return $resultauth;
 	}
 
 	public static function getRequest($link)
@@ -34,8 +36,16 @@ class Api
 		$client = new \GuzzleHttp\Client();
 
 		$url = self::server . "api/" . $link;
-		$jar = new \GuzzleHttp\Cookie\CookieJar();
-		$request = $client->request('GET', $url, ['cookies' => $jar]);
+		$headers = [];
+		if(Session::has('token')){
+			$headers = [
+				'Authorization' => 'Bearer ' . Session::get('token'),        
+				'Accept'        => 'application/json',
+			];
+		}
+		$request = $client->request('GET', $url,[
+		        'headers' => $headers
+		    ]);
 
 		$response = $request->getBody()->getContents();
 
@@ -47,11 +57,15 @@ class Api
 		$client = new \GuzzleHttp\Client();
 		
 		$url = self::server . "api/" . $link;
-
+		$headers = [];
+		if(Session::has('token')){
+			$headers = [
+				'Authorization' => 'Bearer ' . Session::get('token'),        
+				'Accept'        => 'application/json',
+			];
+		}
 		//$myBody['name'] = "Demo";
-		
-		$jar = new \GuzzleHttp\Cookie\CookieJar();
-		$request = $client->post($url,  ['form_params'=>$myBody], $url, ['cookies' => $jar]);
+		$request = $client->post($url,  ['headers' => $headers, 'form_params'=>$myBody]);
 
 		$response = $request->getBody()->getContents();
 
@@ -65,10 +79,16 @@ class Api
 		$client = new \GuzzleHttp\Client();
 		
 		$url = self::server . "api/" . $link;
-
+		$headers = [];
+		if(Session::has('token')){
+			$headers = [
+				'Authorization' => 'Bearer ' . Session::get('token'),        
+				'Accept'        => 'application/json',
+			];
+		}
 		//$myBody['name'] = "Demo";
 
-		$request = $client->put($url,  ['body'=>$myBody]);
+		$request = $client->put($url,  ['headers' => $headers, 'body'=>$myBody]);
 
 		$response = $request->send();
 
@@ -82,8 +102,16 @@ class Api
 		$client = new \GuzzleHttp\Client();
 		
 		$url = self::server . "api/" . $link;
-
-		$request = $client->delete($url);
+		$headers = [];
+		if(Session::has('token')){
+			$headers = [
+				'Authorization' => 'Bearer ' . Session::get('token'),        
+				'Accept'        => 'application/json',
+			];
+		}
+		$request = $client->delete($url,[
+		        'headers' => $headers
+		    ]);
 
 		$response = $request->send();
 
