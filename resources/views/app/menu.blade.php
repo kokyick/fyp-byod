@@ -177,17 +177,20 @@
                   <div class="containerExtra">
                   <div id="container" class="clearfix">
 				  @foreach ($MenuList as $Menu)
+                        @if($Menu['outofstock']!=True)
 						<div class="element transition {{ $Menu['food_type_id'] }} myBtn" id="{{ route('singlemenus', $Menu['merchant_product_id']) }}" data-category="transition">
 							<div class="card">
 								<div class="card-content">
                                     <?php $pieces = explode(",", $Menu['name']); ?>
                     				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{$Menu['name']}}</span>
-									@for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
-										<span>☆</span>
+                                    <span>{{ $Menu['price'] }} RM</span>
+                                    @for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
+										<!-- <span>☆</span> -->
 									@endfor
 								</div>
 							</div>
 						</div>
+                        @endif
 				  @endforeach
 		       </div>
                </div>

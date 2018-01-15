@@ -73,7 +73,8 @@
 				   @endif
 				  <li><a href="{{ route('viewcart') }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Cart</a>
               <ul>
-                <li><a href="{{ route('vieworders') }}">My Orders</a></li>
+                <li><a href="{{ route('viewcart') }}">Cart</a></li>
+                <li><a href="{{ route('vieworders') }}">Orders</a></li>
               </ul>
           </li>
                   <!--<li><a href="{{ route('viewindex1') }}">about us</a></li>
