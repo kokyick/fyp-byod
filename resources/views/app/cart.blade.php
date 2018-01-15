@@ -77,16 +77,17 @@
 
       <div class="card" style="width: 100%;">
          <div class="card-content">
+          <h3 style="color:#EF5350; float: left;">Promo code:</h3>
             <form action="{{ route('addpromo')}}" method="POST">
               {{ csrf_field() }}
-              <input type="text" name="promo" placeholder="Promo Code" class="form-control" id="promo" style="width: 80%; float: left;" required="true">
-              <button type="submit" style="width: 20%; float: right;" class="btn btn-primary">Apply</button><br/>
+              <input type="text" name="promo" placeholder="Promo Code" class="form-control" id="promo" style="width: 70%; float: left;" required="true">
+              <button type="submit" style="float: right;" class="btn btn-primary">Apply</button><br/>
             </form>
          </div>
        </div>
  @if(Session::has('cart'))
    <button style="width:100%;" type="button" id="myBtn2" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i> Pay by cash</button>
-   <button style="width:100%; margin-top:10px;" type="button" id="myBtn1" class="btn btn-primary myBtn1"><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
+   <button style="width:100%; margin-top:10px;" type="button" id="myBtn1" class="btn btn-primary myBtn1" disabled><i class="fa fa-credit-card" aria-hidden="true"></i></i> Pay by card</button>
  @endif
 </div>
 </div>
