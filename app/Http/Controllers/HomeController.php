@@ -69,6 +69,7 @@ class HomeController extends Controller
         //Menus
         $OList =Api::getRequest("UserClosedOrders");
         $OrderList = json_decode( $OList, true );
+        
         $CList =Api::getRequest("UserOpenOrders");
         $COrderList = json_decode( $CList, true );
         return view("app.orders", compact('OrderList','COrderList'));

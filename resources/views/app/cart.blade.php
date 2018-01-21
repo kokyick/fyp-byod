@@ -29,7 +29,7 @@
      </div>
      <div class="col-lg-4 col-md-4 col-sm-4">
       <div class="card" style="width: 100%;">
-         <div class="card-content">
+         <div class="card-content" style="width: auto;">
             <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
             <hr/>
             <h2 style="padding:0;">Sub Total</h2>
@@ -76,12 +76,12 @@
    </div>
 
       <div class="card" style="width: 100%;">
-         <div class="card-content">
-          <h3 style="color:#EF5350; float: left;">Promo code:</h3>
+         <div class="card-content" style="width: auto;">
+          <h3 style="color:#EF5350;">Promo code:</h3>
             <form action="{{ route('addpromo')}}" method="POST">
               {{ csrf_field() }}
-              <input type="text" name="promo" placeholder="Promo Code" class="form-control" id="promo" style="width: 70%; float: left;" required="true">
-              <button type="submit" style="float: right;" class="btn btn-primary">Apply</button><br/>
+              <input type="text" name="promo" placeholder="Promo Code" class="form-control" id="promo" required="true"><br/>
+              <button type="submit" class="btn btn-primary">Apply</button><br/>
             </form>
          </div>
        </div>

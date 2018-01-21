@@ -11,10 +11,10 @@
                 <h2 class="pad_bot2">My Current Orders</h2>
                 <div class="row links">
                     <div class="col-lg-6 col-md-6 col-sm-6" style="width:100%;">
-
+                    @if($COrderList!=null)
                     @foreach ($COrderList as $cfood)
                     <div class="card" style="width: 30%;">
-                           <div class="card-content">
+                           <div class="card-content" style="width:auto;">
                               <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
                               <hr/>
                               <h2 style="padding:0;">Orders #{{ $cfood[0]['order_id'] }}</h2>
@@ -36,6 +36,7 @@
                          </div>
                      </div>
                    @endforeach
+                   @endif
              </div>
          </div>
 
@@ -44,10 +45,10 @@
                 <h2 class="pad_bot2">My Past Orders</h2>
                 <div class="row links">
                     <div class="col-lg-6 col-md-6 col-sm-6" style="width:100%;">
-
+                    @if($COrderList!=null)
                     @foreach ($OrderList as $food)
                     <div class="card" style="width: 30%;">
-                           <div class="card-content">
+                           <div class="card-content" style="width:auto;">
                               <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
                               <hr/>
                               <h2 style="padding:0;">Orders #{{ $food[0]['order_id'] }}</h2>
@@ -69,6 +70,7 @@
                          </div>
                      </div>
                    @endforeach
+                   @endif
              </div>
          </div>
 

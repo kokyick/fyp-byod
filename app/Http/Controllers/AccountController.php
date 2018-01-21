@@ -18,8 +18,10 @@ class AccountController extends Controller
 		$result =Api::postLogin($request->username, $request->pw);
 		//Session::flush();
 		//{{print_r(Session::get('token')->getHeader('Set-Cookie')[0])}}
+		if(Session::has('token')){
+			Session::forget('token');
+		}
 		Session::put('token',$result);
-		//dd($result);
 		return redirect()->route('viewindex');
 
 	}	

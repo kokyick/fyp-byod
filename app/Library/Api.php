@@ -25,7 +25,8 @@ class Api
 			]
 		]);
 		$response = $result->getBody()->getContents();
-		$resultauth=substr($response,17,491);
+		$resultauth=substr($response,17,512);
+		//dd($resultauth);
 		return $resultauth;
 	}
 

@@ -136,7 +136,7 @@
                             </div>
                         </address>
 							<div class="card" style="width: 90%;">
-								<div class="card-content">
+								<div class="card-content" style="width:auto;">
 									<figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
 									<hr/>
 									<h2 style="padding:0;">My Cart</h2>
