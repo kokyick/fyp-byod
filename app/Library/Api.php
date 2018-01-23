@@ -25,9 +25,10 @@ class Api
 			]
 		]);
 		$response = $result->getBody()->getContents();
-		$resultauth=substr($response,17,512);
-		//dd($resultauth);
-		return $resultauth;
+		$resultauth=json_decode($response);
+		$resu1=reset($resultauth);
+		// dd($resu1);
+		return $resu1;
 	}
 
 	public static function getRequest($link)
