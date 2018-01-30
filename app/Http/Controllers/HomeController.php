@@ -43,15 +43,24 @@ class HomeController extends Controller
 	public function viewcart()
     {
 		$subtotal=0;
+        $svscharge=0;
+        $gstcharge=0;
 		if(Session::has('cart')){
 			foreach (Session::get('cart') as $food){
 				$subtotal+=floatval($food['itemprice'])*floatval($food['quantity']);
 			}
 			if(Session::has('outlet')){
 				$outlet=Session::get('outlet');
-				$gstcharge=$subtotal*(floatval($outlet['gst'])/100);
-				$svscharge=$subtotal*(floatval($outlet['servicecharge'])/100);
-				$subtotal=round($subtotal+$gstcharge+$svscharge, 2);
+                if(floatval($outlet['gst'])>0){
+				    $gstcharge=$subtotal*(floatval($outlet['gst'])/100);
+                }
+                if(floatval($outlet['servicecharge'])>0){
+                    $svscharge=$subtotal*(floatval($outlet['servicecharge'])/100);
+                }
+                $subtotal=$subtotal+$gstcharge+$svscharge;
+                //dd($subtotal);
+				//$subtotal=round($subtotal+$gstcharge+$svscharge, 2);
+                $subtotal=round($subtotal / 5,2) * 5;
 			}
 		}
         if(Session::has('promo')){
@@ -59,6 +68,7 @@ class HomeController extends Controller
             $subtotal=$subtotal-$discounted;
             // dd($finalprice);
         }
+
         Session::forget('subtotal'); 
         Session::put('subtotal', $subtotal); 
 		

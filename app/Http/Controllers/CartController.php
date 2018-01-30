@@ -103,6 +103,31 @@ class CartController extends Controller
     return redirect()->route('viewcart');
 
   }
+  public function DelCart(Request $request)
+  {
+	$itemno=$request->itemno;
+
+	if(Session::has('cart')){
+		$counter=-1;
+		$found=-1;
+		$tempCart=Session::get('cart');
+		foreach (Session::get('cart') as $food){
+			$counter+=1;
+			if($food['itemid']==$itemno){
+				$found=$counter;
+			}
+		}
+		if ($found>=0){
+			array_splice($tempCart, $found, 1);
+
+			Session::forget('cart');
+			Session::put('cart', $tempCart);
+		}
+	}
+
+    return redirect()->route('viewcart');
+
+  }
   public function AddCart(Request $request)
   {
 	//Check if its the same outlet

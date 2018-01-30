@@ -17,9 +17,14 @@
                      @foreach (Session::get('cart') as $food)
                      <div class="card myBtn">
                       <div class="card-content">
+                        <form action="{{ route('deletecart')}}" method="POST">
+                          <input type="text" style="display: none;" class="form-control" name="itemno" id="itemno" value="{{$food['itemid']}}" required="true">
+                          {{ csrf_field() }}
+                          <button style="border: 0; border-radius: 50%; float: right;" type="submit"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></button>
+                        </form>
                          <img src="{{ $food['itemproduct_image'] }}" alt="{{ $food['itemname'] }}" class="img-thumb img-thumbnail">
                          <h3>{{ $food['itemname'] }}</h3>
-                         <p style="margin-bottom: 0px; color: #ef5350;">{{ $food['itemprice'] }} x {{ $food['quantity'] }} RM </p>
+                         <p style="margin-bottom: 0px; color: #ef5350;">{{ $food['itemprice'] }} RM x {{ $food['quantity'] }} </p>
                      </div>
                  </div>
                  @endforeach
