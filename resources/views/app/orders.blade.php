@@ -30,6 +30,8 @@
                                  <li>{{ $cfoods['name'] }} x {{ $cfoods['quantity'] }}</li>
                              </ul>
                              @endforeach
+
+                              <h3 class="myBtn" id="{{ $cfood[0]['order_id'] }}"><i style="color: #81C784;" class="fa fa-plus" aria-hidden="true"></i> Add more dishes</h3>
                              <hr/>
                              <h3>{{ $cfood[0]['order_bill'] }} RM</h3>
                              <hr/>
@@ -64,6 +66,8 @@
                                  <li>{{ $foods['name'] }} x {{ $foods['quantity'] }}</li>
                              </ul>
                              @endforeach
+
+                              <h3 class="myBtn" id="{{ $food[0]['order_id'] }}"><i style="color: #81C784;" class="fa fa-plus" aria-hidden="true"></i> Add more dishes</h3>
                              <hr/>
                              <h3>{{ $food[0]['order_bill'] }} RM</h3>
                              <hr/>
@@ -161,48 +165,70 @@
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
-  <!-- Modal content -->
+  <!-- Add Modal content -->
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
-      <h2 style="color: #FFFFFF;">Fish</h2>
-  </div>
-  <div class="modal-body">
-    <div class="row privacy_page">
-        <div class="col-lg-4 col-md-4 col-sm-4">
-            <a href="#" class="thumb"><figure class="img-polaroid"><img src="img/food_img.jpg" alt=""></figure></a>
-        </div>   
-        <div class="col-lg-8 col-md-8 col-sm-8" style="text-align:center;">
-            <figure><img src="img/smalllogo1.png" alt=""></figure>
-            <hr/>
-            <h3>Fish</h3>
-            <hr/>
-            <p>This is a fish.</p>
-            <div class="center">
+    <div class="modal-tit">
+    <h2 style="color: #FFFFFF;">Add new dish to restaurant</h2>
+    </div>
+    </div>
+    <div class="modal-body">
+        <div class="row privacy_page">   
+      <div style="text-align:center;">
+        <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
+        <hr/>
+        <div class="modal-info">
+          
+              <div class="input-group" style="width:100%;">
+                <h3>Select dish</h3>
+                <div class="table-responsive">     
+          <table id="table" style="height: auto;" class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Add To Order</th>
+              </tr>
+            </thead>
+            <tbody>
+               @foreach ($DishList as $Dish)
+              <tr class="vieworders">
+                <td>
+                  {{ $Dish['merchant_product_id'] }}
+                </td>
+                <td>
+                    <a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Dish['product_image'] }}" alt=""></figure></a>
+                </td>
+                <td>
+                    {{ $Dish['name'] }}
+                </td>
+                <td>
+                  <form action="{{ route('dodishadd')}}" method="POST">
+                    {{ csrf_field() }}
+                     <input style="display: block;" placeholder="Quantity" id="quant" type="number" name="quant" class="form-control">
+                     <textarea style="display: block;" rows="3" placeholder="Remarks" id="rmk" type="text" name="rmk" class="form-control"></textarea> 
+                     <input style="display: block;" id="orderid" type="text" name="orderid" class="order_id ord form-control input-number">
+                     <input style="display: block;" id="dishid" type="text" name="dishid" value="{{ $Dish['outletproduct_id'] }}" class="ord form-control input-number">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Order</button>
+                  </form>
+                </td>
+              </tr>
+             @endforeach
+          </tbody>
+        </table>
+        </div>
 
-               <p>
-               </p><div class="input-group">
-                <span class="input-group-btn">
-                   <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-                    <span class="glyphicon glyphicon-minus"></span>
-                </button>
-            </span>
-            <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
-            <span class="input-group-btn">
-               <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                  <span class="glyphicon glyphicon-plus"></span>
-              </button>
-          </span>
-      </div>
-      <p></p>
-      <h2 style="padding:0;"><i class="fa fa-trash" aria-hidden="true"></i></h2>
+              </div>
+          
+        </div>
+      </div> 
+        </div> 
+    </div>
+    <div class="modal-footer">
+    </div>
   </div>
-</div> 
-</div> 
-</div>
-<div class="modal-footer">
-</div>
-</div>
 
 </div>
 
@@ -286,16 +312,37 @@ $(".input-number").keydown(function (e) {
 // Get the modal
 var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
+$('.myBtn').click(function(){
+  var food = $(this).attr('id');
+  $('.order_id').attr('value', food);
+  // $.get(food,function(data){
+  //   var header="<h3>" + data.name + "</h3>";
+  //   var body=data.price+" RM<br/> ";
+  //   for (i = 0; i < Math.round(data.avg_ratings); i++) { 
+  //     body += "<span>☆</span>";
+  //   }
+  //   var title = "<h2 style='color: #FFFFFF;'>"+data.name+"</h2>"
+  //   $(".modal-info").html(body);
+  //   $(".modal-head").html(header);
+  //   $(".modal-tit").html(title);
+  //   $("#modal_image").attr("src",data.product_image);
+  //   $('#itemid').attr('value', data.merchant_product_id);
+  //   $('#itemname').attr('value', data.name);
+  //   $('#itemprice').attr('value', data.price);
+  //   $('#itemproduct_image').attr('value', data.product_image);
+  //   $('#itemfood_type').attr('value', data.food_type);
+  //   $('#itemmerchant_id').attr('value', data.merchant_id);
+  //       $('#itemoutlet_productid').attr('value', data.outletproduct_id)
+  // });
+  
+
+  modal.style.display = "block";
+});
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -310,294 +357,6 @@ window.onclick = function(event) {
 }
 </script>
 
-<!-- DISPLAY CARD -->
-<style>
-/* The Modal (background) */
-.modal1 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content1 {
-    position: relative;
-    border-radius: 10px;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close1 {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close1:hover,
-.close1:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header1 {
-    padding: 2px 16px;
-    border-radius: 10px 10px 0px 0px;
-    background-color: #EF5350;
-    color: white;
-}
-
-.modal-body1 {padding: 2px 90px;}
-
-.modal-footer1 {
-	border-radius: 10px;
-    padding: 2px 16px;
-    background-color: #EF5350;
-    color: white;
-}
-</style>
-
-<!-- The Modal -->
-<div id="myModal1" class="modal1">
-
-  <!-- Modal content -->
-  <div class="modal-content1">
-    <div class="modal-header1">
-      <span class="close1">&times;</span>
-      <h2 style="color: #FFFFFF;">Payment</h2>
-  </div>
-  <div class="modal-body1">
-    <div class="row privacy_page" style="padding:10px; text-align:center;">
-
-        <figure><img src="img/smalllogo1.png" alt=""></figure>
-        <hr/>
-        <h3>Choose your card:</h3>
-        <hr/>
-
-        <form action="{{ route('ordercard')}}" method="POST">
-            {{ csrf_field() }}
-          <select id="aitemfood_type" name="aitemfood_type"  class="form-control">
-              <option value="0003">XXXX-XXXX-XXXX-0003</option>
-          </select>
-          <hr/>
-          <h3>Enter your table id:</h3>
-          <hr/>
-          <input type="number" class="form-control" name="tableId" id="tableId" required="true">
-          <input type="text" style="display: none;" class="form-control" name="amt" id="amt" value="{{Session::get('subtotal')}}" required="true">
-          <div class="center">
-
-           <p>
-           </p>
-           <p></p>
-
-           <button type="submit" class="btn btn-danger"><i class="fa fa-money" aria-hidden="true"></i> Pay now</button><br/>
-           <a href="{{ route('addcard')}}" class="btn-link btn-link2">Add card<span></span></a>
-       </div>
-   </form>
-
-</div> 
-</div>
-<div class="modal-footer1">
-</div>
-</div>
-
-</div>
-
-<script>
-    var modal1 = document.getElementById('myModal1');
-// Get the button that opens the modal
-var btn1 = document.getElementById("myBtn1");
-
-// Get the <span> element that closes the modal
-var span1 = document.getElementsByClassName("close1")[0];
-
-// When the user clicks the button, open the modal 
-btn1.onclick = function() {
-    modal1.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span1.onclick = function() {
-    modal1.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal1) {
-        modal1.style.display = "none";
-    }
-}
-</script>
-
-<!-- Update table number -->
-<style>
-/* The Modal (background) */
-.modal2 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal2-content {
-    position: relative;
-    border-radius: 10px;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close2 {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close2:hover,
-.close2:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal2-header {
-    padding: 2px 16px;
-    border-radius: 10px 10px 0px 0px;
-    background-color: #EF5350;
-    color: white;
-}
-
-.modal2-body {padding: 2px 90px;}
-
-.modal2-footer {
-    border-radius: 10px;
-    padding: 2px 16px;
-    background-color: #EF5350;
-    color: white;
-}
-</style>
-
-<!-- The Modal -->
-<div id="myModal2" class="modal2">
-
-  <!-- Modal content -->
-  <div class="modal2-content">
-    <div class="modal2-header">
-      <span class="close2">&times;</span>
-      <h2 style="color: #FFFFFF;">Enter table ID</h2>
-  </div>
-  <div class="modal2-body">
-    <div class="row privacy_page" style="padding:10px; text-align:center;">
-
-        <figure><img src="img/smalllogo1.png" alt=""></figure>
-        <hr/>
-        <h3>Enter your table id:</h3>
-        <hr/>
-        <form action="{{ route('ordercash')}}" method="POST">
-            {{ csrf_field() }}
-            <input type="number" class="form-control" name="table_id" id="table_id" required="true">
-            <input type="text" style="display: none;" class="form-control" name="total_bill" id="total_bill" value="{{Session::get('subtotal')}}" required="true">
-            <div class="center">
-
-                <p>
-                </p>
-                <p></p>
-
-                <button type="submit" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i> Send Order</button><br/>
-                <!-- <a href="{{ route('addcard')}}" class="btn-link btn-link2">Add card<span></span></a> -->
-            </div>
-        </form>
-
-    </div> 
-</div>
-<div class="modal2-footer">
-</div>
-</div>
-
-</div>
-
-<script>
-    var modal2 = document.getElementById('myModal2');
-// Get the button that opens the modal
-var btn2 = document.getElementById("myBtn2");
-
-// Get the <span> element that closes the modal
-var span2 = document.getElementsByClassName("close2")[0];
-
-// When the user clicks the button, open the modal 
-btn2.onclick = function() {
-    modal2.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span2.onclick = function() {
-    modal2.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal2) {
-        modal2.style.display = "none";
-    }
-}
-</script>
 
 
 @endsection

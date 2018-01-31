@@ -79,10 +79,19 @@ class HomeController extends Controller
         //Menus
         $OList =Api::getRequest("UserClosedOrders");
         $OrderList = json_decode( $OList, true );
+
+
+        //Menus
+        $DList =Api::getRequest("Products?outlet_id=" . 13);
+        $DishList = json_decode( $DList, true );
         
         $CList =Api::getRequest("UserOpenOrders");
         $COrderList = json_decode( $CList, true );
-        return view("app.orders", compact('OrderList','COrderList'));
+
+        //Food types
+        $FTList =Api::getRequest("FoodTypes");
+        $FoodTypeList = json_decode( $FTList, true );
+        return view("app.orders", compact('OrderList','COrderList', 'DishList', 'FoodTypeList'));
     }
 	public function viewfeedback()
     {

@@ -195,5 +195,22 @@ class CartController extends Controller
 
     return redirect()->route('menus', ['id'=>$outId]);
   }
+  public function DoDishAdd(Request $request)
+  {
+	//Save edits
+	$quantity=$request->quant;
+	$remarks=$request->rmk;
+	$order_id=$request->orderid;
+	$dish_id=$request->dishid;
 
+	$myBody['quantity'] = $quantity;
+	$myBody['comments'] = $remarks;
+	$myBody['outlet_product_id'] = (int)$dish_id;
+	$myBody['order_id'] = (int)$order_id;
+
+	//dd($dat);
+	$result =Api::postRequest("addOneExtraFoodOrder/",$myBody);
+
+    return redirect()->route('vieworders');
+  }
 }

@@ -42,6 +42,8 @@ Route::post('/ordercash/', 'CartController@AddOrderCash')->name('ordercash');
 Route::post('/ordercard/', 'CartController@AddOrderCard')->name('ordercard');
 Route::post('/addpromo/', 'CartController@AddPromo')->name('addpromo');
 
+Route::post('/dodishadd/', 'CartController@DoDishAdd')->name('dodishadd');
+
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
 Route::post('/doregister/', 'AccountController@register')->name('doregister');
 Route::get('/dologout/', 'AccountController@logout')->name('dologout');
