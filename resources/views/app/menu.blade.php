@@ -120,7 +120,8 @@
 		?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 gmap">
-                      <div class="map"><iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q={{$streetname}}&amp;aq=0&amp;sll={{$result->result->geometry->location->lat}},{{$result->result->geometry->location->lng}}&amp;sspn={{$result->result->geometry->location->lat}}{{$result->result->geometry->location->lng}}&amp;ie=UTF8&amp;hq=&amp;hnear={{$postal}}&amp;ll={{$result->result->geometry->location->lat}},{{$result->result->geometry->location->lng}}&amp;spn=0.01628,0.025663&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe></div>
+                      <div class="map"><iframe
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0OrpJ6VE&key=AIzaSyAvtjVa2M8Uu1qjsPU_IKFZMnC3kyoje44" allowfullscreen></iframe></div>
                     </div>  
                  </div> 
                  <div class="row">
