@@ -113,7 +113,7 @@
 			$postal=$OutData['postal_code'];
 			$streetname=$OutData['streetname'];
 
-			$url ="https://maps.googleapis.com/maps/api/geocode/xml?address={{$postal}}&sensor=false";
+			$url ="http://maps.googleapis.com/maps/api/geocode/xml?address={{$postal}}&sensor=false";
 			$result = simplexml_load_file($url);
 			
 			//print_r($result->result->geometry->location);
