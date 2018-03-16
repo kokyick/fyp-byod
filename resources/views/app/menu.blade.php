@@ -312,13 +312,16 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0O
 					<p></p>
 					<form action="{{ route('addcart')}}" style="float: right; margin-left: 5px;" method="POST">
 						{{ csrf_field() }}
+                        <textarea style="display: block;" rows="3" placeholder="Additional Remarks" id="foodDescrip" type="text" name="foodDescrip" class="form-control"></textarea> 
+                        <br/>
 						<div class="input-group">
 						  <span class="input-group-btn">
 							  <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="foodQuantity">
 								<span class="glyphicon glyphicon-minus"></span>
 							  </button>
 						  </span>
-						  <input id="foodQuantity" type="text" name="foodQuantity" class="form-control input-number" value="1" min="1" max="100">
+						  <input id="foodQuantity" type="number" name="foodQuantity" class="form-control input-number" value="1" min="1" max="100">
+                          
 						  <span class="input-group-btn">
 							  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="foodQuantity">
 								  <span class="glyphicon glyphicon-plus"></span>

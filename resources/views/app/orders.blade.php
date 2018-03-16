@@ -209,8 +209,8 @@
                     {{ csrf_field() }}
                      <input style="display: block;" placeholder="Quantity" id="quant" type="number" name="quant" class="form-control">
                      <textarea style="display: block;" rows="3" placeholder="Remarks" id="rmk" type="text" name="rmk" class="form-control"></textarea> 
-                     <input style="display: block;" id="orderid" type="text" name="orderid" class="order_id ord form-control input-number">
-                     <input style="display: block;" id="dishid" type="text" name="dishid" value="{{ $Dish['outletproduct_id'] }}" class="ord form-control input-number">
+                     <input style="display: none;" id="orderid" type="text" name="orderid" class="order_id ord form-control input-number">
+                     <input style="display: none;" id="dishid" type="text" name="dishid" value="{{ $Dish['outletproduct_id'] }}" class="ord form-control input-number">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Order</button>
                   </form>
                 </td>

@@ -24,7 +24,7 @@ class CartController extends Controller
 		$addFood['outlet_product_id']=(int)$food['itemoutlet_productid'];
     	$addFood['order_id']=(int)$resultObj->order_id;
 		$addFood['quantity']=(int)$food['quantity'];
-		$addFood['comments']="";
+		$addFood['comments']=$food['comments'];
 		$result =Api::postRequest("addFoodOrder",$addFood);
 	}
 
@@ -134,6 +134,7 @@ class CartController extends Controller
 	//Check if items is already added
     //Add product to session cart
 	$quan=$request->foodQuantity;
+	$desc=$request->foodDescrip;
 	$outId=$request->outletid;
 	$itemid=$request->itemid;
 	$itemname=$request->itemname;
@@ -145,7 +146,7 @@ class CartController extends Controller
 	//delete all session data
 	//Session::flush();
 	//new product to be added
-	$product=collect(['quantity' => $quan, 'outletid' => $outId, 'itemid' =>$itemid, 'itemname' =>$itemname, 'itemprice' =>$itemprice, 'itemproduct_image' =>$itemproduct_image,'itemoutlet_productid'=>$itemoutlet_productid, 'itemfood_type' =>$itemfood_type, 'itemmerchant_id' =>$itemmerchant_id]);
+	$product=collect(['quantity' => $quan, 'comments' => $desc, 'outletid' => $outId, 'itemid' =>$itemid, 'itemname' =>$itemname, 'itemprice' =>$itemprice, 'itemproduct_image' =>$itemproduct_image,'itemoutlet_productid'=>$itemoutlet_productid, 'itemfood_type' =>$itemfood_type, 'itemmerchant_id' =>$itemmerchant_id]);
 	//retrieve old cart
 	//if(Session::has('cart')){
 		//$oldcart=Session::get('cart');
