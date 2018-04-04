@@ -149,6 +149,7 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0O
 										@endforeach
 										<hr/>
 									</ul>
+                                    <a href="{{route('viewcart')}}"><button style="width:100%;" type="button" id="myBtn2" class="btn btn-primary"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Go to Cart</button></a>
 									@endif
 								</div>
 							</div>
@@ -183,7 +184,7 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0O
 							<div class="card">
 								<div class="card-content">
                                     <?php $pieces = explode(",", $Menu['name']); ?>
-                    				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{$Menu['name']}}</span>
+                    				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">({{$Menu['restaurant_food_id']}}) {{$Menu['name']}}</span>
                                     <span>{{ $Menu['price'] }} RM</span>
                                     @for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
 										<!-- <span>☆</span> -->
@@ -336,6 +337,7 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0O
                         <input style="display: none;" id="itemoutlet_productid" type="text" name="itemoutlet_productid" class="form-control input-number">
 						<input style="display: none;" id="itemfood_type" type="text" name="itemfood_type" class="form-control input-number">
 						<input style="display: none;" id="itemmerchant_id" type="text" name="itemmerchant_id" class="form-control input-number">
+                        <input style="display: none;" id="itemrestaurant_id" type="text" name="itemrestaurant_id" class="form-control input-number">
 						<p></p>
 						<button type="submit" class="btn btn-primary"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
 					</form>
@@ -452,6 +454,8 @@ $('.myBtn').click(function(){
 		$('#itemproduct_image').attr('value', data.product_image);
 		$('#itemfood_type').attr('value', data.food_type);
 		$('#itemmerchant_id').attr('value', data.merchant_id);
+        $('#itemrestaurant_id').attr('value', data.restaurant_food_id);
+
         $('#itemoutlet_productid').attr('value', data.outletproduct_id)
 	});
 	

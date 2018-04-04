@@ -143,10 +143,12 @@ class CartController extends Controller
 	$itemfood_type=$request->itemfood_type;	
 	$itemmerchant_id=$request->itemmerchant_id;
 	$itemoutlet_productid=$request->itemoutlet_productid;
+	$itemrestaurant_id=$request->itemrestaurant_id;
+
 	//delete all session data
 	//Session::flush();
 	//new product to be added
-	$product=collect(['quantity' => $quan, 'comments' => $desc, 'outletid' => $outId, 'itemid' =>$itemid, 'itemname' =>$itemname, 'itemprice' =>$itemprice, 'itemproduct_image' =>$itemproduct_image,'itemoutlet_productid'=>$itemoutlet_productid, 'itemfood_type' =>$itemfood_type, 'itemmerchant_id' =>$itemmerchant_id]);
+	$product=collect(['quantity' => $quan, 'comments' => $desc, 'outletid' => $outId, 'itemid' =>$itemid, 'itemname' =>$itemname, 'itemprice' =>$itemprice, 'itemproduct_image' =>$itemproduct_image,'itemoutlet_productid'=>$itemoutlet_productid, 'itemfood_type' =>$itemfood_type, 'itemmerchant_id' =>$itemmerchant_id, 'itemrestaurant_id' =>$itemrestaurant_id]);
 	//retrieve old cart
 	//if(Session::has('cart')){
 		//$oldcart=Session::get('cart');

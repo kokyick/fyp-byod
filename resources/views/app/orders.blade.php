@@ -27,7 +27,7 @@
 
                               @foreach ($cfood as $cfoods)
                               <ul class="list2">
-                                 <li>{{ $cfoods['name'] }} x {{ $cfoods['quantity'] }}</li>
+                                 <li>({{$cfoods['restaurant_food_id']}}) {{ $cfoods['name'] }} x {{ $cfoods['quantity'] }}</li>
                              </ul>
                              @endforeach
 
@@ -63,7 +63,7 @@
 
                               @foreach ($food as $foods)
                               <ul class="list2">
-                                 <li>{{ $foods['name'] }} x {{ $foods['quantity'] }}</li>
+                                 <li>({{$foods['restaurant_food_id']}}) {{ $foods['name'] }} x {{ $foods['quantity'] }}</li>
                              </ul>
                              @endforeach
 

@@ -23,7 +23,7 @@
                           <button style="border: 0; border-radius: 50%; float: right;" type="submit"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></button>
                         </form>
                          <img src="{{ $food['itemproduct_image'] }}" alt="{{ $food['itemname'] }}" class="img-thumb img-thumbnail">
-                         <h3>{{ $food['itemname'] }}</h3>
+                         <h3>({{$food['itemrestaurant_id']}}) {{ $food['itemname'] }}</h3>
                          <p style="margin-bottom: 0px; color: #ef5350;">{{ $food['itemprice'] }} RM x {{ $food['quantity'] }} </p>
                      </div>
                  </div>
@@ -42,7 +42,7 @@
             @if(Session::get('cart'))
             <ul class="list2">
                @foreach (Session::get('cart') as $food)
-               <li><a href="#filter" data-option-value=".{{ $food }}">{{ $food['itemname'] }} x{{ $food['quantity'] }}</a></li>
+               <li><a href="#filter" data-option-value=".{{ $food }}">({{$food['itemrestaurant_id']}}) {{ $food['itemname'] }} x{{ $food['quantity'] }}</a></li>
                @endforeach
                <hr style="border-top: ridge 1px;" />
                <h3 style="color:#EF5350;">Service charge:</h3>
